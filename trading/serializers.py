@@ -1,6 +1,6 @@
 from django.db.models import fields
 from rest_framework import serializers
-from .models import User, Product, Comment, Cart, Chat
+from .models import User, Product, Comment, Cart
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -10,7 +10,7 @@ class UserSerializer(serializers.ModelSerializer):
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = ['PID', 'productTitle', 'productDetail', 'category']
+        fields = ['PID', 'productTitle', 'productDetail', 'imageTitle', 'imageFile', 'imageContext']
 
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
@@ -20,4 +20,4 @@ class CommentSerializer(serializers.ModelSerializer):
 class CartSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cart 
-        fields = ['CID', 'UID']       
+        fields = ['CID', 'UID']
