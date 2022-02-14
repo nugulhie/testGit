@@ -19,7 +19,7 @@ def productList(request, slug):
     try:
         productData = Product.objects
     except Product.DoesNotExist:
-        print("asd")
+        print("Product DataBase does not Exist")
         return JsonResponse({'success' : False, 'result' : {}}, status = status.HTTP_404_NOT_FOUND)
 
     if(request.method == 'GET'):
@@ -42,3 +42,28 @@ def productList(request, slug):
         else:
             print(parseSerializer.errors)
             return JsonResponse({'success':False, 'result':{}}, status = status.HTTP_400_BAD_REQUEST)
+ 
+
+@api_view(['POST'])
+def userassign(request):
+    try:
+        userData = User.objects
+    except User.DoesNotExist:
+        print("User Database does not Exist")
+        return JsonResponse({'success' : False, 'result' : {}}, status = status.HTTP_404_NOT_FOUND)
+    
+    if(request.method == 'POST'):
+        parsedData = JSONParser().parse(request)
+        parsedSerializer = UserSerializer(data = parsedData)
+        if parsedSerializer.is_valid() :
+            parsedSerializer.save()
+            return JsonResponse({'success':True, 'result': parsedSerializer.data}, status = status.HTTP_201_CREATED)
+        else:
+            print(parsedSerializer.errors)
+            return JsonResponse({'success':False, 'result':{}}, status = status.HTTP_400_BAD_REQUEST)
+
+    if(request.method == 'PUT'):
+        parsedData = JSONParser().parse(request)
+        filtedData = userData.filter(UID = parsedData['UID'])
+        
+        

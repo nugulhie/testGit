@@ -16,6 +16,7 @@ class User(models.Model):
     address                 = models.CharField(max_length=100, null=False)
     phone                   = models.CharField(max_length=20, null=False)
     nickname                = models.CharField(max_length=10, null=False, default="ABC")
+    pushToken               = models.CharField(max_length=255, null=False)
 
     def __str__(self):
         return self.nickname

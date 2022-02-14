@@ -5,7 +5,7 @@ from .models import User, Product, Comment, Cart
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['UID', 'pwToekn', 'email', 'name', 'address', 'phone', 'nickname']
+        fields = ['UID', 'pwToekn', 'email', 'name', 'address', 'phone', 'nickname', 'pushToken']
 
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
